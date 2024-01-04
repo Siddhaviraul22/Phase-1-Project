@@ -1,7 +1,7 @@
 package Camerarentalaapp;
 
 public class User {
-    private double walletBalance;
+	private double walletBalance;
 
     public User() {
         this.walletBalance = 0.0;
