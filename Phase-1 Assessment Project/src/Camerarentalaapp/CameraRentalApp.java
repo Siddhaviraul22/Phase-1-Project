@@ -62,15 +62,7 @@ public class CameraRentalApp {
     }
 
     public void depositToWallet(double amount) {
-        try {
-            if (amount <= 0) {
-                throw new IllegalArgumentException("Invalid deposit amount. Amount must be greater than 0.");
-            }
-            user.setWalletBalance(user.getWalletBalance() + amount);
-            System.out.println("Deposit successful. New wallet balance: $" + user.getWalletBalance());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Deposit failed. " + e.getMessage());
-        }
+        user.depositToWallet(amount);
     }
 
     public void rentCamera(int cameraId) {
@@ -91,7 +83,7 @@ public class CameraRentalApp {
                 selectedCamera.setStatus("Rented");
                 System.out.println("Camera rented successfully. Remaining balance: $" + user.getWalletBalance());
             } else {
-                System.out.println("Insufficient wallet balance to rent the camera.");
+                System.out.println("Insufficient wallet balance to rent the camera. Current balance: $" + user.getWalletBalance());
             }
         } else {
             System.out.println("Camera not found with ID: " + cameraId);
@@ -110,6 +102,12 @@ public class CameraRentalApp {
                         camera.getModel() + "\t" + camera.getPerDayRent() + "\t\t" +
                         camera.getStatus());
             }
+        }
+    }
+
+    public void checkEmptyCameraList() {
+        if (cameraList.isEmpty()) {
+            System.out.println("No cameras available for rent.");
         }
     }
 
@@ -186,6 +184,7 @@ public class CameraRentalApp {
                         break;
                     case 2:
                         System.out.println("----- Rent a Camera -----");
+                        rentalApp.checkEmptyCameraList();
                         System.out.println("Available Cameras:");
                         rentalApp.displaySortedAvailableCameras();
                         System.out.print("Enter the camera ID to rent: ");
@@ -194,6 +193,7 @@ public class CameraRentalApp {
                         break;
                     case 3:
                         System.out.println("----- View All Cameras -----");
+                        rentalApp.checkEmptyCameraList();
                         rentalApp.displaySortedAvailableCameras();
                         break;
                     case 4:
