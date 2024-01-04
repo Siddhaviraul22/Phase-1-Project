@@ -1,7 +1,7 @@
 package Camerarentalaapp;
 
 public class Camera {
-	    private static int nextCameraId = 1;
+	 private static int nextCameraId = 1;
 
 	    private int cameraId;
 	    private String brand;
